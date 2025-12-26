@@ -348,3 +348,7 @@ if __name__ == '__main__':
     
     # Start the server
     app.run(host='0.0.0.0', port=3000, debug=False)
+    
+    if os.getenv("CI") == "true":
+        logger.info("CI environment detected, exiting after startup")
+        sys.exit(0)
