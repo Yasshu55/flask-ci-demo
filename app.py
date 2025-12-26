@@ -346,9 +346,9 @@ if __name__ == '__main__':
     logger.info("=" * 70)
     logger.info("")
     
-    # Start the server
-    app.run(host='0.0.0.0', port=3000, debug=False)
-    
     if os.getenv("CI") == "true":
         logger.info("CI environment detected, exiting after startup")
         sys.exit(0)
+    # Start the server
+    app.run(host='0.0.0.0', port=3000, debug=False)
+    
