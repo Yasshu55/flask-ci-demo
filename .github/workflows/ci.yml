@@ -32,7 +32,7 @@ jobs:
         run: |
           python app.py
         env:
-          # NOTE: DATABASE_URL is intentionally missing to trigger failure
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SECRET_KEY: test-secret-key
           API_KEY: test-api-key
           REDIS_URL: redis://localhost:6379
