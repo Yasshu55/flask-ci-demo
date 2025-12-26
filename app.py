@@ -319,44 +319,32 @@ def handle_generic_error(e):
 # ============================================================
 
 if __name__ == '__main__':
-    try:
-        logger.info("")
-        logger.info("=" * 70)
-        logger.info("STARTING APPLICATION BOOTSTRAP")
-        logger.info("=" * 70)
-        
-        # Validate configuration (THIS WILL FAIL IF ENV VARS MISSING)
-        config = ConfigValidator.validate()
-        
-        # Initialize database connection
-        logger.info("")
-        logger.info("Initializing database connection...")
-        db = DatabaseConnection(config['DATABASE_URL'])
-        db.connect()
-        
-        # Store start time
-        app.config['start_time'] = time.time()
-        
-        logger.info("")
-        logger.info("=" * 70)
-        logger.info("APPLICATION READY")
-        logger.info("=" * 70)
-        logger.info(f"Server starting on port 3000...")
-        logger.info("Press CTRL+C to quit")
-        logger.info("=" * 70)
-        logger.info("")
-        
-        # Start the server
-        app.run(host='0.0.0.0', port=3000, debug=False)
-        
-    except KeyError as e:
-        logger.critical("=" * 70)
-        logger.critical("APPLICATION STARTUP FAILED")
-        logger.critical("=" * 70)
-        logger.critical(f"Error: {str(e)}")
-        logger.critical("Cannot start application without required configuration")
-        logger.critical("=" * 70)
-        sys.exit(1)
-    except Exception as e:
-        logger.critical(f"Unexpected error during startup: {str(e)}", exc_info=True)
-        sys.exit(1)
+    logger.info("")
+    logger.info("=" * 70)
+    logger.info("STARTING APPLICATION BOOTSTRAP")
+    logger.info("=" * 70)
+    
+    # Validate configuration (THIS WILL FAIL IF ENV VARS MISSING)
+    # Let the exception propagate naturally for traceback
+    config = ConfigValidator.validate()
+    
+    # Initialize database connection
+    logger.info("")
+    logger.info("Initializing database connection...")
+    db = DatabaseConnection(config['DATABASE_URL'])
+    db.connect()
+    
+    # Store start time
+    app.config['start_time'] = time.time()
+    
+    logger.info("")
+    logger.info("=" * 70)
+    logger.info("APPLICATION READY")
+    logger.info("=" * 70)
+    logger.info(f"Server starting on port 3000...")
+    logger.info("Press CTRL+C to quit")
+    logger.info("=" * 70)
+    logger.info("")
+    
+    # Start the server
+    app.run(host='0.0.0.0', port=3000, debug=False)
