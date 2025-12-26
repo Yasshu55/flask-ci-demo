@@ -337,7 +337,7 @@ if __name__ == '__main__':
     # Store start time
     app.config['start_time'] = time.time()
     
-    logger.info("")
+    logger.info("s")
     logger.info("=" * 70)
     logger.info("APPLICATION READY")
     logger.info("=" * 70)
